@@ -1,0 +1,10 @@
+server-type: LOBBY
+
+ignore-events: []
+
+servers:
+  a:
+    name: "Какая-то карта"
+    need: 3
+    max: 8
+    server: a

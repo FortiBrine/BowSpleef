@@ -1,0 +1,41 @@
+
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+
+}
+
+group = "me.fortibrine"
+version = "1.0"
+
+repositories {
+    mavenCentral()
+    maven { url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/" }
+    maven { url = "https://oss.sonatype.org/content/groups/public/" }
+}
+
+dependencies {
+    compileOnly "org.spigotmc:spigot-api:1.13.2-R0.1-SNAPSHOT"
+    compileOnly "org.projectlombok:lombok:1.18.20"
+    compileOnly "com.google.code.gson:gson:2.8.0"
+    annotationProcessor "org.projectlombok:lombok:1.18.20"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
+
+shadowJar {
+    archiveClassifier.set('')
+}
