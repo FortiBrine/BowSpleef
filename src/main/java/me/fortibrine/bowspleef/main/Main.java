@@ -1,7 +1,8 @@
 package me.fortibrine.bowspleef.main;
 
 import lombok.Getter;
-import me.fortibrine.bowspleef.utils.JSONManager;
+import me.fortibrine.bowspleef.listeners.DeathEventListener;
+import me.fortibrine.bowspleef.utils.SQLManager;
 import me.fortibrine.bowspleef.utils.VariableManager;
 import me.fortibrine.bowspleef.utils.bungeecord.MessageListener;
 import me.fortibrine.bowspleef.utils.bungeecord.MessageSendUtil;
@@ -17,7 +18,7 @@ public class Main extends JavaPlugin {
 
     private VariableManager variableManager;
     private MessageSendUtil messageSendUtil;
-    private JSONManager jsonManager;
+    private SQLManager sqlManager;
 
     @Override
     public void onEnable() {
@@ -45,8 +46,9 @@ public class Main extends JavaPlugin {
 
         this.variableManager = new VariableManager(this);
         this.messageSendUtil = new MessageSendUtil(this);
-        this.jsonManager = new JSONManager();
+        this.sqlManager = new SQLManager();
 
+        pluginManager.registerEvents(new DeathEventListener(this), this);
 
     }
 
