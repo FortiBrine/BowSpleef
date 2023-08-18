@@ -1,8 +1,9 @@
-package me.fortibrine.bowspleef.utils;
+package me.fortibrine.bowspleef.utils.config;
 
 import lombok.Getter;
 import me.fortibrine.bowspleef.arena.Arena;
 import me.fortibrine.bowspleef.main.Main;
+import me.fortibrine.bowspleef.utils.ServerType;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -19,10 +20,13 @@ public class VariableManager {
 
     private List<Arena> arenas = new ArrayList<>();
     private ServerType serverType;
+    private int threads;
 
     public VariableManager(Main plugin) {
 
         FileConfiguration config = plugin.getConfig();
+
+        threads = config.getInt("threads");
 
         for (String key : config.getConfigurationSection("servers").getKeys(false)) {
             ConfigurationSection server = config.getConfigurationSection("servers." + key);

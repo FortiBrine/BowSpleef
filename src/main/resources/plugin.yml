@@ -3,3 +3,13 @@ main: me.fortibrine.bowspleef.main.Main
 
 version: ${version}
 api-version: 1.13
+
+commands:
+  arena:
+    description: "Arena list"
+    usage: /arena
+
+permissions:
+  bowspleef.arena:
+    default: true
+    description: "Arena list permission"

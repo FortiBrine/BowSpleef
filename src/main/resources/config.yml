@@ -2,6 +2,16 @@ server-type: LOBBY
 
 ignore-events: []
 
+threads: 1
+
+arena-list:
+  title: "Список арен"
+  item:
+    material: PAPER
+    name: "Арена"
+    lore:
+      - "%need/%max"
+
 servers:
   a:
     name: "Какая-то карта"
