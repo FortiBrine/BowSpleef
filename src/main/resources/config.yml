@@ -4,13 +4,16 @@ ignore-events: []
 
 threads: 1
 
+lobby: "lobby"
+
 arena-list:
   title: "Список арен"
   item:
     material: PAPER
     name: "Арена"
     lore:
-      - "%need/%max"
+      - "%all/%max"
+      - "Надо %need"
 
 servers:
   a:

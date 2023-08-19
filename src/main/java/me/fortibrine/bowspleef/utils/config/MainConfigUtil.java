@@ -1,47 +1,30 @@
 package me.fortibrine.bowspleef.utils.config;
 
 import lombok.Getter;
-import me.fortibrine.bowspleef.arena.Arena;
 import me.fortibrine.bowspleef.main.Main;
 import me.fortibrine.bowspleef.utils.ServerType;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter
-public class VariableManager {
+public class MainConfigUtil {
 
-    private List<Arena> arenas = new ArrayList<>();
     private ServerType serverType;
     private int threads;
+    private String lobbyServer;
 
-    public VariableManager(Main plugin) {
+    public MainConfigUtil(Main plugin) {
 
         FileConfiguration config = plugin.getConfig();
 
         threads = config.getInt("threads");
 
-        for (String key : config.getConfigurationSection("servers").getKeys(false)) {
-            ConfigurationSection server = config.getConfigurationSection("servers." + key);
-
-            String name = server.getString("name");
-            String serverName = server.getString("server");
-            int needPlayers = server.getInt("need");
-            int maxPlayers = server.getInt("max");
-
-            Arena arena = new Arena(name, serverName, needPlayers, maxPlayers);
-
-            arenas.add(arena);
-        }
-
         this.serverType = ServerType.valueOf(config.getString("server-type"));
+        this.lobbyServer = config.getString("lobby");
 
         config.getStringList("ignore-events").forEach(eventString -> {
             try {

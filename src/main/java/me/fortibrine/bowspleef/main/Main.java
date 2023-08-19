@@ -4,10 +4,12 @@ import lombok.Getter;
 import me.fortibrine.bowspleef.commands.CommandArena;
 import me.fortibrine.bowspleef.listeners.DeathEventListener;
 import me.fortibrine.bowspleef.listeners.InventoryListener;
+import me.fortibrine.bowspleef.listeners.PlayerLeaveEventListener;
+import me.fortibrine.bowspleef.utils.ArenaManager;
 import me.fortibrine.bowspleef.utils.SQLManager;
 import me.fortibrine.bowspleef.utils.ServerType;
 import me.fortibrine.bowspleef.utils.config.MessageConfigUtil;
-import me.fortibrine.bowspleef.utils.config.VariableManager;
+import me.fortibrine.bowspleef.utils.config.MainConfigUtil;
 import me.fortibrine.bowspleef.utils.bungeecord.MessageListener;
 import me.fortibrine.bowspleef.utils.bungeecord.MessageSendUtil;
 import org.bukkit.Bukkit;
@@ -20,10 +22,12 @@ import java.util.logging.Level;
 @Getter
 public class Main extends JavaPlugin {
 
-    private VariableManager variableManager;
+    private MainConfigUtil variableManager;
     private MessageSendUtil messageSendUtil;
     private SQLManager sqlManager;
     private MessageConfigUtil messageConfigUtil;
+    private MainConfigUtil mainConfigUtil;
+    private ArenaManager arenaManager;
 
     @Override
     public void onEnable() {
@@ -69,7 +73,7 @@ public class Main extends JavaPlugin {
 
 
     private void initUtils() {
-        this.variableManager = new VariableManager(this);
+        this.variableManager = new MainConfigUtil(this);
 
         if (variableManager.getServerType() == ServerType.LOBBY) {
             this.sqlManager = new SQLManager(variableManager.getThreads());
@@ -77,11 +81,16 @@ public class Main extends JavaPlugin {
 
         this.messageSendUtil = new MessageSendUtil(this);
         this.messageConfigUtil = new MessageConfigUtil(this);
+        this.mainConfigUtil = new MainConfigUtil(this);
+        this.arenaManager = new ArenaManager(this);
     }
 
     private void initListeners() {
-        Bukkit.getPluginManager().registerEvents(new DeathEventListener(this), this);
-        Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
+        PluginManager pluginManager = Bukkit.getPluginManager();
+
+        pluginManager.registerEvents(new DeathEventListener(this), this);
+        pluginManager.registerEvents(new InventoryListener(), this);
+        pluginManager.registerEvents(new PlayerLeaveEventListener(this), this);
     }
 
     private void initCommands() {
