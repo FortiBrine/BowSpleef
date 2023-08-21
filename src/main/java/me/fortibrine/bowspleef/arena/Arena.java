@@ -8,13 +8,13 @@ import java.util.Set;
 import java.util.UUID;
 
 @Getter
-public class Arena {
+public final class Arena {
 
-    private String name;
-    private String server;
-    private int needPlayers;
-    private int maxPlayers;
-    private Set<UUID> players = new HashSet<>();
+    private final String name;
+    private final String server;
+    private final int needPlayers;
+    private final int maxPlayers;
+    private final Set<UUID> players = new HashSet<>();
 
     @Setter
     private boolean inGame = false;
@@ -29,6 +29,11 @@ public class Arena {
     public String insertArena(String str) {
         if (str == null) return "";
 
-        return str.replace("%name", this.getName()).replace("%server", this.getServer()).replace("%need", String.valueOf(this.getNeedPlayers())).replace("%max", String.valueOf(this.getMaxPlayers())).replace("%all", String.valueOf(this.getPlayers().size()));
+        return str
+                .replace("%name", this.getName())
+                .replace("%server", this.getServer())
+                .replace("%need", String.valueOf(this.getNeedPlayers()))
+                .replace("%max", String.valueOf(this.getMaxPlayers()))
+                .replace("%all", String.valueOf(this.getPlayers().size()));
     }
 }

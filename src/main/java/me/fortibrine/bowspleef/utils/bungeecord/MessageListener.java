@@ -3,17 +3,17 @@ package me.fortibrine.bowspleef.utils.bungeecord;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 import me.fortibrine.bowspleef.main.Main;
-import me.fortibrine.bowspleef.utils.SQLManager;
 import me.fortibrine.bowspleef.utils.ServerType;
+import me.fortibrine.bowspleef.utils.sql.PlayerManager;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
 public class MessageListener implements PluginMessageListener {
 
     private ServerType serverType;
-    private SQLManager sqlManager;
+    private PlayerManager playerManager;
     public MessageListener(Main plugin) {
-        this.sqlManager = plugin.getSqlManager();
+        this.playerManager = plugin.getPlayerManager();
         this.serverType = plugin.getVariableManager().getServerType();
     }
 
@@ -26,7 +26,7 @@ public class MessageListener implements PluginMessageListener {
         String subchannel = in.readUTF();
 
         if (subchannel.equals("win")) {
-            this.sqlManager.setWins(player.getUniqueId(), this.sqlManager.getWins(player.getUniqueId())+1);
+            this.playerManager.addWin(player);
         }
     }
 

@@ -3,7 +3,7 @@ package me.fortibrine.bowspleef.inventory;
 import lombok.Getter;
 import me.fortibrine.bowspleef.arena.Arena;
 import me.fortibrine.bowspleef.main.Main;
-import me.fortibrine.bowspleef.utils.ArenaManager;
+import me.fortibrine.bowspleef.arena.ArenaManager;
 import me.fortibrine.bowspleef.utils.config.MessageConfigUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -15,11 +15,9 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class ArenaListInventory implements InventoryHolder {

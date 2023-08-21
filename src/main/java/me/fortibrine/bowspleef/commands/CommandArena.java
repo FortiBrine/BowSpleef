@@ -23,6 +23,7 @@ public class CommandArena implements CommandExecutor {
 
         if (!player.hasPermission("bowspleef.arena")) {
             player.sendMessage(plugin.getMessageConfigUtil().parseMessage("not-enough-permission"));
+            return true;
         }
 
         ArenaListInventory arenaListInventory = new ArenaListInventory(plugin);

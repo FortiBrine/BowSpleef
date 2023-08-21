@@ -1,7 +1,6 @@
-package me.fortibrine.bowspleef.utils;
+package me.fortibrine.bowspleef.arena;
 
 import lombok.Getter;
-import me.fortibrine.bowspleef.arena.Arena;
 import me.fortibrine.bowspleef.main.Main;
 import me.fortibrine.bowspleef.utils.bungeecord.MessageSendUtil;
 import me.fortibrine.bowspleef.utils.config.MainConfigUtil;
@@ -14,13 +13,13 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class ArenaManager {
+public final class ArenaManager {
 
     @Getter
     private Set<Arena> arenas = new HashSet<>();
 
-    private MainConfigUtil mainConfigUtil;
-    private MessageSendUtil messageSendUtil;
+    private final MainConfigUtil mainConfigUtil;
+    private final MessageSendUtil messageSendUtil;
 
     public ArenaManager(Main plugin) {
         FileConfiguration config = plugin.getConfig();
